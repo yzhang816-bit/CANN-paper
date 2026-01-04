@@ -1,30 +1,48 @@
-# Curvature-Aware Neural Networks (CANN) — Paper
+# Curvature-Aware Neural Networks (CANN) — Code
 
-This repository contains the LaTeX source for the paper:
-“Curvature-Aware Neural Networks for Robust Graph Representation Learning”.
+This repository provides runnable code to reproduce core experiments for Curvature-Aware Neural Networks (CANN).
 
-## Contents
-- `cann_v7.tex`: Compact standalone LaTeX (compiles directly)
-- `cann_v8.tex`: Extended version with detailed sections
+## Quick Start
+- Python 3.9+
+- Install dependencies:
+  - `pip install -r requirements.txt`
+- Prepare datasets (optional; scripts auto-download when needed):
+  - `python scripts/datasets/prepare_datasets.py --real`
+  - `python scripts/datasets/prepare_datasets.py --synthetic`
 
-## Build
-- Install a LaTeX distribution (TeX Live or MiKTeX)
-- Compile (recommended):
-  - Windows (PowerShell):
-    - `pdflatex cann_v7.tex`
-    - `pdflatex cann_v7.tex`
-  - Linux/macOS:
-    - `pdflatex cann_v7.tex && pdflatex cann_v7.tex`
-- No BibTeX needed (bibliography is inline where present)
-- To compile the extended version: replace `cann_v7.tex` with `cann_v8.tex` in the commands
+## Run Experiments
+- Node classification (Planetoid Cora/CiteSeer/PubMed):
+  - `python scripts/experiments/train_node.py`
+- Link prediction (Cora + optional Facebook/Twitter if present):
+  - `python scripts/experiments/train_link.py`
+- Graph regression (ZINC subset):
+  - `python scripts/experiments/train_graph.py`
+- Ablation study:
+  - `python scripts/experiments/ablation.py`
+- Robustness evaluation:
+  - `python scripts/experiments/robustness.py`
+- Scalability timings:
+  - `python scripts/experiments/scalability.py`
+- End-to-end convenience runner:
+  - `python scripts/experiments/run_all.py`
 
-## Repository Structure
-- `cann_v7.tex` — paper source (standalone)
-- `cann_v8.tex` — extended paper source
-- `.gitignore` — ignores LaTeX build artifacts
-- `LICENSE` — CC BY 4.0 license for the paper content
+Outputs are written to `data/*.json`.
+
+## Code Structure
+- `scripts/experiments/`
+  - `models.py` — GCN, GAT, and CANN implementations
+  - `curvature.py` — approximate node curvature utility
+  - `train_*.py` — training and evaluation scripts
+  - `ablation.py`, `robustness.py`, `interpretability.py`, `scalability.py`
+- `scripts/datasets/`
+  - `generate_synthetic.py` — synthetic graph generators (SBM, BA, mixed)
+  - `download_real.py` — downloads Planetoid and SNAP datasets, optional OGB
+  - `prepare_datasets.py` — orchestration script
+- `requirements.txt` — dependencies
+
+## Notes
+- torch_geometric may require platform-specific wheels; follow official install docs if `pip install` fails.
+- OGB is optional (only used for molecular dataset helper): if you do not need OGB you can skip installing it.
 
 ## License
-This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0).
-You are free to share and adapt the material with appropriate credit.
-See the LICENSE file for full terms.
+See LICENSE.
