@@ -4,20 +4,23 @@ This repository contains the LaTeX source for the paper:
 “Curvature-Aware Neural Networks for Robust Graph Representation Learning”.
 
 ## Contents
-- `cann_v8.tex`: Main LaTeX source with inline bibliography
+- `cann_v7.tex`: Compact standalone LaTeX (compiles directly)
+- `cann_v8.tex`: Extended version with detailed sections
 
 ## Build
 - Install a LaTeX distribution (TeX Live or MiKTeX)
-- Compile:
+- Compile (recommended):
   - Windows (PowerShell):
-    - `pdflatex cann_v8.tex`
-    - `pdflatex cann_v8.tex`
+    - `pdflatex cann_v7.tex`
+    - `pdflatex cann_v7.tex`
   - Linux/macOS:
-    - `pdflatex cann_v8.tex && pdflatex cann_v8.tex`
-- No BibTeX needed (bibliography is inline)
+    - `pdflatex cann_v7.tex && pdflatex cann_v7.tex`
+- No BibTeX needed (bibliography is inline where present)
+- To compile the extended version: replace `cann_v7.tex` with `cann_v8.tex` in the commands
 
 ## Repository Structure
-- `cann_v8.tex` — paper source
+- `cann_v7.tex` — paper source (standalone)
+- `cann_v8.tex` — extended paper source
 - `.gitignore` — ignores LaTeX build artifacts
 - `LICENSE` — CC BY 4.0 license for the paper content
 
